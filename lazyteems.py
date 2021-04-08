@@ -4,7 +4,7 @@ import datetime as date
 import os
 import keyboard
 
-chromedriver = webdriver.Chrome(executable_path="/home/kiaria/Documents/github_projects/modbot/chromedriver")
+chromedriver = webdriver.Chrome(executable_path="/home/kiaria/Documents/github_projects/lazyteems/chromedriver")
 chromedriver.get("https://teams.microsoft.com")
 
 login_email = "srinivas.2020a@vitstudent.ac.in"
