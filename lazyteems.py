@@ -7,8 +7,8 @@ import keyboard
 chromedriver = webdriver.Chrome(executable_path="/home/kiaria/Documents/github_projects/lazyteems/chromedriver")
 chromedriver.get("https://teams.microsoft.com")
 
-login_email = "srinivas.2020a@vitstudent.ac.in"
-login_password = "RvvK487$"
+login_email = "test@someemail.in"
+login_password = "somethingsshouldbekeptprivate"
 
 def login(email, password):
     email_field = chromedriver.find_element_by_xpath('//*[@id="i0116"]')
