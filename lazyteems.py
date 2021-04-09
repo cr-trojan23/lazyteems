@@ -2,13 +2,23 @@ from selenium import webdriver
 import time
 import datetime as date
 import os
-import keyboard
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.chrome.options import Options
 
-chromedriver = webdriver.Chrome(executable_path="/home/kiaria/Documents/github_projects/lazyteems/chromedriver")
+chromeoptions = Options()
+chromeoptions.add_argument("start-maximized")
+chromeoptions.add_experimental_option("prefs", { \
+    "profile.default_content_setting_values.media_stream_mic": 2, 
+    "profile.default_content_setting_values.media_stream_camera": 2,
+    "profile.default_content_setting_values.geolocation": 2, 
+    "profile.default_content_setting_values.notifications": 2 
+    })
+
+chromedriver = webdriver.Chrome(chrome_options = chromeoptions, executable_path="/home/kiaria/Documents/github_projects/lazyteems/chromedriver")
 chromedriver.get("https://teams.microsoft.com")
-
-login_email = "test@someemail.in"
-login_password = "somethingsshouldbekeptprivate"
+team_to_join = ""
+login_email = "srinivas.2020a@vitstudent.ac.in"
+login_password = "RvvK487$"
 
 def login(email, password):
     email_field = chromedriver.find_element_by_xpath('//*[@id="i0116"]')
@@ -16,7 +26,7 @@ def login(email, password):
     email_field.send_keys(email)
     chromedriver.find_element_by_xpath('//*[@id="idSIButton9"]').click()
     password_field.send_keys(password)
-    time.sleep(5)
+    time.sleep(3)
     chromedriver.find_element_by_xpath('//*[@id="idSIButton9"]').click()
     time.sleep(3)
     chromedriver.find_element_by_xpath('//*[@id="idBtn_Back"]').click()
@@ -174,15 +184,23 @@ def join_class(team_name):
     time.sleep(2)
     searchbox_input = chromedriver.find_element_by_xpath('//*[@id="searchInputField"]')
     searchbox_input.send_keys(team_name)
-    keyboard.press_and_release('key_down')
-    keyboard.press_and_release('enter')
+    time.sleep(1)
+    searchbox_input.send_keys(Keys.DOWN)
+    time.sleep(1)
+    searchbox_input.send_keys(Keys.ENTER)
+    time.sleep(3)
+    chromedriver.find_element_by_xpath('//*[@id="m1614304773707"]/calling-join-button/button/span').click()
+    time.sleep(3)
+    chromedriver.find_element_by_xpath('//*[@id="ngdialog1"]/div[2]/div/div/div/div[1]/div/div/div[2]/div/button').click()
+    time.sleep(2)
+    empty_space = chromedriver.find_element_by_xpath('//*[@id="page-content-wrapper"]/div[1]/div/calling-pre-join-screen/div/div/div[2]/div[1]/div[2]/div/div/section/div[1]/div/div/button')
+    empty_space.send_keys(Keys.ENTER)
 
 
 #if os.path.exists("am8classes.txt") == False:
 #    write_timetable()
 #else:
-#    read_timetable()
+#    team_to_join = read_timetable()
 
 login(login_email, login_password)
-join_class("CSI2001 - ELA Digital logic and Computer Design L51+L52")
-
+join_class("PHY1701_C1_Winter 20")
