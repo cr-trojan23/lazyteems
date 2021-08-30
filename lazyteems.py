@@ -17,8 +17,8 @@ chromeoptions.add_experimental_option("prefs", { \
 chromedriver = webdriver.Chrome(chrome_options = chromeoptions, executable_path="/home/kiaria/Documents/github_projects/lazyteems/chromedriver")
 chromedriver.get("https://teams.microsoft.com")
 team_to_join = ""
-login_email = "srinivas.2020a@vitstudent.ac.in"
-login_password = "RvvK487$"
+login_email = input("Enter your email here\n")
+login_password = input("Enter your password")
 
 def login(email, password):
     email_field = chromedriver.find_element_by_xpath('//*[@id="i0116"]')
@@ -188,13 +188,14 @@ def join_class(team_name):
     searchbox_input.send_keys(Keys.DOWN)
     time.sleep(1)
     searchbox_input.send_keys(Keys.ENTER)
-    time.sleep(3)
-    chromedriver.find_element_by_xpath('//*[@id="m1614304773707"]/calling-join-button/button/span').click()
+    time.sleep(4)
+    join1 = chromedriver.find_element_by_xpath('/html/body/div[1]/div[2]/div[2]/div[1]/middle-messages-stripe/div/messages-header/div[2]/div/message-pane/div/div[1]/div/div/message-list/div/virtual-repeat/div/div[15]/div/thread/div/div[2]/calling-thread-header/div/calling-join-button/button')
+    join1.send_keys(Keys.ENTER)
     time.sleep(3)
     chromedriver.find_element_by_xpath('//*[@id="ngdialog1"]/div[2]/div/div/div/div[1]/div/div/div[2]/div/button').click()
     time.sleep(2)
-    empty_space = chromedriver.find_element_by_xpath('//*[@id="page-content-wrapper"]/div[1]/div/calling-pre-join-screen/div/div/div[2]/div[1]/div[2]/div/div/section/div[1]/div/div/button')
-    empty_space.send_keys(Keys.ENTER)
+    join = chromedriver.find_element_by_xpath('//*[@id="page-content-wrapper"]/div[1]/div/calling-pre-join-screen/div/div/div[2]/div[1]/div[2]/div/div/section/div[1]/div/div/button')
+    join.send_keys(Keys.ENTER)
 
 
 #if os.path.exists("am8classes.txt") == False:
@@ -203,4 +204,4 @@ def join_class(team_name):
 #    team_to_join = read_timetable()
 
 login(login_email, login_password)
-join_class("PHY1701_C1_Winter 20")
+join_class("MAT1014-Winter 20-21-A1")
